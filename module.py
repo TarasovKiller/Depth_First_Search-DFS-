@@ -10,7 +10,6 @@ from networkx.drawing.nx_pydot import graphviz_layout
 
 
 class Drawing:
-    # edges = []
 
     def __init__(self, G, n):
         self.n = n
@@ -57,10 +56,6 @@ class Drawing:
             plt.show()
         plt.clf()
 
-    #
-    # def clf(self):
-    #     plt.clf()
-
     def close(self):
         plt.close()
         self.node_color = "#A0CBE2"
@@ -79,23 +74,16 @@ class Graph:
             self.n = 11
         else:
             self.n = 12
-        # self.thread = threading.Thread()
         self.G = self.__fill_graph()
         self.G_matrix = self.__represent_to_adjacency_matrix()
         self.G_list = self.__represent_to_adjacency_list()
         self.drawing = Drawing(self.G, self.n)
-
-        # self.lock = threading.Lock()
-        # self.stop_thread = False
 
     def __str__(self):
         return str(self.G)
 
     def set_abcd(self, a, b, c, d):
         self.a, self.b, self.c, self.d = a, b, c, d
-
-    # def set_stop(self):
-    #     self.stop = True
 
     def __fill_graph(self):
         # Функция заполняет переменную G ребрами в соответсвии с условием задания
@@ -206,13 +194,6 @@ class Graph:
     def draw(self, time=-1):
         self.drawing.draw_graph(time)
 
-    # def exit(self):
-    #     sys.exit()
-    # def error_function(self):
-    #     raise SyntaxError
-    #
-    # def set_lock_true(self):
-    #     self.stop_thread = True
     def depth_first_search(self, s=0, draw_mode=False, pause_set=-1):
         pred = [-1] * self.n  # родительские узлы
         color = ["White"] * self.n  # цвет узлов
@@ -230,12 +211,6 @@ class Graph:
             if neighbors:
                 for neighbor in neighbors:
 
-                    # self.lock.acquire()
-                    # if self.stop_thread:
-                    #     self.drawing.close()
-                    #     raise BlockingIOError
-                    # self.lock.release()
-
                     if draw_mode:
                         edge_set.add((v, neighbor))
                         self.set_color_edge(edge_set)
@@ -251,24 +226,14 @@ class Graph:
                 self.set_color_node(color)
                 self.draw(pause_set)
 
-        # self.thread= threading.Thread(dfs_visit(s))
-        # self.thread.start()
-
         dfs_visit(s)
-        # if self.stop_thread is False:
         if draw_mode:
             self.set_color_node(color)
             self.draw(-1)
 
 if __name__ == "__main__":
-#     # a, b, c, d = int(input("Enter a: ")), int(input("Enter b: ")), int(input("Enter c: ")), int(input("Enter d: "))
     a, b, c, d = 43, 32, 12, 54
     g = Graph(a, b, c, d)
-#     # print(g.drawing.D.nodes)
     g.test_fill()
-#
-#     # print(g.drawing.draw_animation())
-#     g.print_adjacency_list()
     g.depth_first_search(0,draw_mode=True, pause_set=1)
-#     g.drawing.draw_graph()
-#     # g.drawing.draw_graph()
+

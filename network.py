@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from tkinter import *
-import threading
+import sys
 from tkinter import messagebox
 
-from OR.module import Graph
+from module import Graph
 
 root = Tk()
 root.title("Network App")
-# root.geometry("260x260")
+
 
 inputFrame = LabelFrame(root, text="Input Field")
 inputFrame.grid(row=0, column=0, ipadx=10, ipady=5, columnspan=4)
@@ -34,12 +34,6 @@ a_Entry.grid(row=0, column=1, padx=3)
 b_Entry.grid(row=0, column=3, padx=3)
 c_Entry.grid(row=0, column=5, padx=3)
 d_Entry.grid(row=0, column=7, padx=3)
-
-# def create_func():
-#     g = Graph(12,23,43,12)
-# def draw_func():
-#     if g is not None:
-#         g.drawing.draw_graph()
 g = Graph(1, 2, 3, 4)
 
 
@@ -56,7 +50,6 @@ def create_func():
     except ValueError:
         return messagebox.showerror("Ошибка", "Пустые ячейки!")
     g.__init__(a, b, c, d)
-    # g.__reduce__()
 
     dfsButton.configure(state=NORMAL)
     showButton.configure(state=NORMAL)
@@ -65,25 +58,13 @@ def create_func():
 
 def draw_func():
     g.drawing.close()
-    # g.drawing.draw_graph()
     g.draw()
 
 def dfs_func():
     # Установить возможность выбора начального узла
     g.drawing.close()
-    # g.stop_thread = False
-    # stopButton.configure(state=NORMAL)
-    # try:
-    #     x = threading.Thread(g.depth_first_search(spin_var.get(),draw_mode=True,pause_set=1))
-    #     x.start()
-    # except BlockingIOError as e:
-    #     print(e)
-    #
-    g.depth_first_search(spin_var.get(), draw_mode=True, pause_set=0.7)
+    g.depth_first_search(spin_var.get(), draw_mode=True, pause_set=0.2)
 
-    # dfsButton.configure(relief=RIDGE)
-    # g.depth_first_search(spin_var.get(), draw_mode=True, pause_set=1)
-    # dfsButton.configure(relief=GROOVE)
 
 
 def stop():
@@ -157,9 +138,6 @@ drawButton.grid(row=1, column=0, columnspan=3)
 showButton.grid(row=2, column=0, columnspan=3)
 dfsButton.grid(row=4, column=0, columnspan=3)
 
-# stopButton = Button(menuFrame,text="Stop",width=34,command=stop, state=DISABLED, overrelief=GROOVE)
-# stopButton.grid(row=7,column=0,columnspan=3)
-# Добавить close кнопку
 closeButton = Button(menuFrame, text="Exit", width=34, state=NORMAL, command=sys.exit, overrelief=GROOVE)
 closeButton.grid(row=6, column=0, columnspan=3)
 
@@ -179,16 +157,4 @@ spinLabel = Label(menuFrame, text="Start node:")
 spinLabel.grid(row=5, columnspan=1, column=0)
 spin.grid(row=5, columnspan=1, column=1)
 
-# top.destroy()
-
-# txtFrame = LabelFrame(root,"Out").grid(row=0,column=1)
-# txt = Message(txtFrame,text="Suck").grid(row=0,column=0)
-# e = Entry(root,width=35,borderwidth=5)
-# e.grid(row=0,column=0,columnspan=3)
-
-
-# clicked = StringVar()
-# drop = OptionMenu(root,clicked,"Start","Settings","Exit")
-# drop.pack()
-# myButton.pack()
 root.mainloop()
